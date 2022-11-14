@@ -1,0 +1,87 @@
+body {
+  background-color: #58595b;
+  font-family: Roboto, sans-serif;
+}
+
+.navbar {
+  background-color: #4dc3b9;
+}
+
+img {
+  width: 20%;
+  align-self: center;
+}
+
+h2 {
+  color: #58595b;
+  font-size: 1rem;
+  align-self: center;
+}
+
+.navbar-style {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+}
+
+.navicon {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  margin-right: 20px;
+}
+
+.navicon a {
+  color: #58595b;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+#searchbar {
+  background-color: #dfdfdf;
+  border: 1.5px solid #dfdfdf;
+  border-radius: 20px;
+  height: 40px;
+  width: 300px;
+  padding-left: 40px;
+  padding-right: 40px;
+  letter-spacing: 0.05rem;
+}
+
+#searchbar:focus {
+  outline: none;
+  border: 1.5px solid #4dc3b9;
+}
+
+#form {
+  margin-top: 150px;
+  position: relative;
+}
+
+#searchicon {
+  position: absolute;
+  color: #818183;
+  top: 12px;
+  left: 15px;
+  cursor: text;
+}
+
+#cancelicon {
+  font-size: 1.5rem;
+  position: absolute;
+  color: #58595b;
+  top: 8px;
+  right: 15px;
+  cursor: pointer;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+  background-color: #dfdfdf;
+}
