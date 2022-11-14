@@ -3,14 +3,6 @@ body {
   font-family: Roboto, sans-serif;
 }
 
-.row {
-  display: flex;
-}
-
-.column-full {
-  flex-basis: 100%;
-}
-
 .navbar {
   background-color: #4dc3b9;
 }
