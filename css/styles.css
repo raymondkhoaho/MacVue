@@ -1,0 +1,44 @@
+body {
+  background-color: #58595b;
+  font-family: Roboto, sans-serif;
+}
+
+.row {
+  display: flex;
+}
+
+.column-full {
+  flex-basis: 100%;
+}
+
+.navbar {
+  background-color: #4dc3b9;
+}
+
+img {
+  width: 20%;
+  align-self: center;
+}
+
+h2 {
+  color: #58595b;
+  font-size: 1rem;
+  align-self: center;
+}
+
+.testing {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  margin: 0 20px;
+}
+
+.navicon {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.navicon a {
+  color: #58595b;
+}
