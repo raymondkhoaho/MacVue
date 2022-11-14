@@ -26,19 +26,59 @@ h2 {
   align-self: center;
 }
 
-.testing {
+.navbar-style {
   display: flex;
   justify-content: space-between;
   height: 60px;
-  margin: 0 20px;
 }
 
 .navicon {
   display: flex;
   align-items: center;
   gap: 25px;
+  margin-right: 20px;
 }
 
 .navicon a {
   color: #58595b;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+#searchbar {
+  background-color: #dfdfdf;
+  border: 1.5px solid #dfdfdf;
+  border-radius: 20px;
+  height: 40px;
+  width: 300px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+#searchbar:focus {
+  outline: none;
+  border: 1.5px solid #4dc3b9;
+}
+
+#form {
+  margin-top: 150px;
+  position: relative;
+}
+
+#searchicon {
+  position: absolute;
+  color: #818183;
+  top: 12px;
+  left: 15px;
+}
+
+#cancelicon {
+  font-size: 1.5rem;
+  position: absolute;
+  color: #58595b;
+  top: 8px;
+  right: 15px;
 }
