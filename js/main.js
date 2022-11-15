@@ -25,7 +25,6 @@ function getFoodData(event) {
       $noResults.setAttribute('class', 'row noresults');
     } else {
       $rowResult.replaceChildren();
-
       for (var i = 0; i < xhr.response.hints.length; i++) {
         var result = renderResult(xhr.response.hints[i]);
         $rowResult.appendChild(result);
@@ -49,7 +48,11 @@ function renderResult(result) {
   $imageDiv.setAttribute('class', 'image-wrapper');
 
   var $newImg = document.createElement('img');
-  $newImg.setAttribute('src', result.food.image);
+  if (result.food.image !== undefined) {
+    $newImg.setAttribute('src', result.food.image);
+  } else {
+    $newImg.setAttribute('src', 'images/MacVueIcon.png');
+  }
 
   var $newH4 = document.createElement('h4');
   $newH4.textContent = result.food.label;
