@@ -5,6 +5,7 @@ var $formSubmit = document.querySelector('#form');
 var $rowResult = document.querySelector('.result-item');
 var $searchForm = document.querySelector('.view1');
 var $resultPage = document.querySelector('.view2');
+var $noResults = document.querySelector('.noresults');
 
 // Clear Search Bar
 function clearSearch(event) {
@@ -12,7 +13,7 @@ function clearSearch(event) {
 }
 $cancelIcon.addEventListener('click', clearSearch);
 
-// HTTP Request
+// HTTP Request Form Submit Event
 
 $formSubmit.addEventListener('submit', getFoodData);
 
@@ -22,17 +23,24 @@ function getFoodData(event) {
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=62e1382f&app_key=fb581bd2de03e8a30b53d8a1a76b8b79&ingr=' + $searchText.value);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    for (var i = 0; i < xhr.response.hints.length; i++) {
-      var result = renderResult(xhr.response.hints[i]);
-      $rowResult.appendChild(result);
-      $searchForm.setAttribute('class', 'view1 container hidden');
-      $resultPage.setAttribute('class', 'view2 container');
+    if (xhr.response.hints.length === 0) {
+      $noResults.setAttribute('class', 'row noresults');
+    } else {
+      for (var i = 0; i < xhr.response.hints.length; i++) {
+        var result = renderResult(xhr.response.hints[i]);
+        $rowResult.appendChild(result);
+        $searchForm.setAttribute('class', 'view1 container hidden');
+        $resultPage.setAttribute('class', 'view2 container');
+
+      }
 
     }
   });
   xhr.send();
   $formSubmit.reset();
 }
+
+// Render result function
 
 function renderResult(result) {
   var $newDiv = document.createElement('div');

@@ -114,3 +114,7 @@ input[type="search"]::-webkit-search-results-decoration {
   display: flex;
   flex-direction: column;
 }
+
+.noresults {
+  justify-content: center;
+}
