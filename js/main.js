@@ -3,6 +3,8 @@ var $cancelIcon = document.querySelector('#cancelicon');
 var $searchText = document.querySelector('#searchbar');
 var $formSubmit = document.querySelector('#form');
 var $rowResult = document.querySelector('.result-item');
+var $searchForm = document.querySelector('.view1');
+var $resultPage = document.querySelector('.view2');
 
 // Clear Search Bar
 function clearSearch(event) {
@@ -23,6 +25,9 @@ function getFoodData(event) {
     for (var i = 0; i < xhr.response.hints.length; i++) {
       var result = renderResult(xhr.response.hints[i]);
       $rowResult.appendChild(result);
+      $searchForm.setAttribute('class', 'view1 container hidden');
+      $resultPage.setAttribute('class', 'view2 container');
+
     }
   });
   xhr.send();
