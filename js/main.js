@@ -24,6 +24,8 @@ function getFoodData(event) {
     if (xhr.response.hints.length === 0) {
       $noResults.setAttribute('class', 'row noresults');
     } else {
+      $rowResult.replaceChildren();
+
       for (var i = 0; i < xhr.response.hints.length; i++) {
         var result = renderResult(xhr.response.hints[i]);
         $rowResult.appendChild(result);
@@ -73,5 +75,6 @@ function viewSwap(view) {
 
 function clickFunction(event) {
   viewSwap('search-form');
+
 }
 $searchLink.addEventListener('click', clickFunction);
