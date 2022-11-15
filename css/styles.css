@@ -118,10 +118,20 @@ input[type="search"]::-webkit-search-results-decoration {
 .flex-column {
   display: flex;
   flex-direction: column;
+  transition: transform 0.5s;
+  cursor: pointer;
 }
 
 .flex-column:hover {
   transform: scale(1.1);
+}
+
+.flex-column:active h4 {
+  color: #4dc3b9;
+}
+
+.flex-column:active img {
+  opacity: 0.25;
 }
 
 .noresults {
