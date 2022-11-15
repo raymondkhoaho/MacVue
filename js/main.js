@@ -3,9 +3,8 @@ var $cancelIcon = document.querySelector('#cancelicon');
 var $searchText = document.querySelector('#searchbar');
 var $formSubmit = document.querySelector('#form');
 var $rowResult = document.querySelector('.result-item');
-var $searchForm = document.querySelector('.view1');
-var $resultPage = document.querySelector('.view2');
 var $noResults = document.querySelector('.noresults');
+var $viewNodes = document.querySelectorAll('.view');
 
 // Clear Search Bar
 function clearSearch(event) {
@@ -14,8 +13,6 @@ function clearSearch(event) {
 $cancelIcon.addEventListener('click', clearSearch);
 
 // HTTP Request Form Submit Event
-
-$formSubmit.addEventListener('submit', getFoodData);
 
 function getFoodData(event) {
   event.preventDefault();
@@ -29,16 +26,15 @@ function getFoodData(event) {
       for (var i = 0; i < xhr.response.hints.length; i++) {
         var result = renderResult(xhr.response.hints[i]);
         $rowResult.appendChild(result);
-        $searchForm.setAttribute('class', 'view1 container hidden');
-        $resultPage.setAttribute('class', 'view2 container');
-
+        viewSwap('results-page');
       }
-
     }
   });
   xhr.send();
   $formSubmit.reset();
 }
+
+$formSubmit.addEventListener('submit', getFoodData);
 
 // Render result function
 
@@ -62,4 +58,16 @@ function renderResult(result) {
   $newDiv.appendChild($newH4);
 
   return $newDiv;
+}
+
+// view swapping
+
+function viewSwap(view) {
+  for (var i = 0; i < $viewNodes.length; i++) {
+    if ($viewNodes[i].getAttribute('data-view') === view) {
+      $viewNodes[i].setAttribute('class', 'view container');
+    } else {
+      $viewNodes[i].setAttribute('class', 'view container hidden');
+    }
+  }
 }
