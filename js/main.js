@@ -29,6 +29,7 @@ function getFoodData(event) {
         var result = renderResult(xhr.response.hints[i]);
         $rowResult.appendChild(result);
         viewSwap('results-page');
+        $noResults.setAttribute('class', 'row noresults hidden');
       }
     }
   });
