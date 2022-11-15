@@ -7,8 +7,8 @@ body {
   background-color: #4dc3b9;
 }
 
-img {
-  width: 20%;
+#icon {
+  width: 12%;
   align-self: center;
 }
 
@@ -16,6 +16,17 @@ h2 {
   color: #58595b;
   font-size: 1rem;
   align-self: center;
+  padding-top: 8px;
+}
+
+h3,
+h4 {
+  color: #fff;
+  font-weight: 400;
+}
+
+h4 {
+  text-align: center;
 }
 
 .navbar-style {
@@ -84,4 +95,45 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
   background-color: #dfdfdf;
+}
+
+.noresults {
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
+}
+
+.image-wrapper {
+  align-self: center;
+  width: 150px;
+  height: 150px;
+  background-color: #4d4e4e;
+  border-radius: 50%;
+}
+
+.image-wrapper img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+
+.flex-column:hover {
+  transform: scale(1.1);
+}
+
+.flex-column:active h4 {
+  color: #4dc3b9;
+}
+
+.flex-column:active img {
+  opacity: 0.25;
 }
