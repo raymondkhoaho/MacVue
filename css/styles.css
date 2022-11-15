@@ -7,7 +7,7 @@ body {
   background-color: #4dc3b9;
 }
 
-img {
+#icon {
   width: 20%;
   align-self: center;
 }
@@ -16,6 +16,16 @@ h2 {
   color: #58595b;
   font-size: 1rem;
   align-self: center;
+}
+
+h3,
+h4 {
+  color: #fff;
+  font-weight: 400;
+}
+
+h4 {
+  text-align: center;
 }
 
 .navbar-style {
@@ -84,4 +94,23 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
   background-color: #dfdfdf;
+}
+
+.hidden {
+  display: none;
+}
+
+.image-wrapper {
+  align-self: center;
+}
+
+.image-wrapper img {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
 }
