@@ -120,6 +120,10 @@ input[type="search"]::-webkit-search-results-decoration {
   flex-direction: column;
 }
 
+.flex-column:hover {
+  transform: scale(1.1);
+}
+
 .noresults {
   justify-content: center;
 }
