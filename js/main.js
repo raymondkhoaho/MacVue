@@ -29,6 +29,7 @@ function getFoodData(event) {
       $rowResult.replaceChildren();
       for (var i = 0; i < xhr.response.hints.length; i++) {
         var result = renderResult(xhr.response.hints[i]);
+        result.setAttribute('data-search-id', i);
         $rowResult.appendChild(result);
         viewSwap('results-page');
         $noResults.setAttribute('class', 'row noresults hidden');
