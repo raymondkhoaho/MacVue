@@ -76,6 +76,8 @@ function viewSwap(view) {
   }
 }
 
+// click function - will need to rework this to account for other icon clicks.
+
 function clickFunction(event) {
   viewSwap('search-form');
 

@@ -97,6 +97,10 @@ input[type="search"]::-webkit-search-results-decoration {
   background-color: #dfdfdf;
 }
 
+.noresults {
+  justify-content: center;
+}
+
 .hidden {
   display: none;
 }
@@ -132,8 +136,4 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .flex-column:active img {
   opacity: 0.25;
-}
-
-.noresults {
-  justify-content: center;
 }
