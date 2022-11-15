@@ -5,6 +5,7 @@ var $formSubmit = document.querySelector('#form');
 var $rowResult = document.querySelector('.result-item');
 var $noResults = document.querySelector('.noresults');
 var $viewNodes = document.querySelectorAll('.view');
+var $searchLink = document.querySelector('.search-link');
 
 // Clear Search Bar
 function clearSearch(event) {
@@ -45,16 +46,14 @@ function renderResult(result) {
   var $imageDiv = document.createElement('div');
   $imageDiv.setAttribute('class', 'image-wrapper');
 
-  $newDiv.appendChild($imageDiv);
-
   var $newImg = document.createElement('img');
   $newImg.setAttribute('src', result.food.image);
-
-  $imageDiv.appendChild($newImg);
 
   var $newH4 = document.createElement('h4');
   $newH4.textContent = result.food.label;
 
+  $newDiv.appendChild($imageDiv);
+  $imageDiv.appendChild($newImg);
   $newDiv.appendChild($newH4);
 
   return $newDiv;
@@ -71,3 +70,8 @@ function viewSwap(view) {
     }
   }
 }
+
+function clickFunction(event) {
+  viewSwap('search-form');
+}
+$searchLink.addEventListener('click', clickFunction);
