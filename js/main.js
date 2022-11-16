@@ -22,14 +22,13 @@ function getFoodData(event) {
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=62e1382f&app_key=fb581bd2de03e8a30b53d8a1a76b8b79&ingr=' + $searchText.value);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    resultsArray.push(xhr.response.hints);
-
     if (xhr.response.hints.length === 0) {
       $noResults.setAttribute('class', 'row noresults');
     } else {
       $rowResult.replaceChildren();
+      resultsArray.push(xhr.response.hints);
       for (var i = 0; i < xhr.response.hints.length; i++) {
-        var result = renderResult(xhr.response.hints[i]);
+        var result = renderResult(resultsArray[0][i]);
         result.setAttribute('data-search-index', i);
         $rowResult.appendChild(result);
         viewSwap('results-page');
@@ -39,7 +38,6 @@ function getFoodData(event) {
   });
   xhr.send();
   $formSubmit.reset();
-
 }
 $formSubmit.addEventListener('submit', getFoodData);
 
@@ -87,6 +85,7 @@ function clickFunction(event) {
   viewSwap('search-form');
   $noResults.setAttribute('class', 'row noresults hidden');
   resultsArray = [];
+  data.view = 'search-form';
 }
 $searchLink.addEventListener('click', clickFunction);
 
@@ -127,6 +126,22 @@ var $favoriteIcon = document.querySelector('#favoriteicon');
 $favoriteIcon.addEventListener('click', saveToFavorite);
 
 function saveToFavorite(event) {
-  $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
-
+  if ($favoriteIcon.getAttribute('data-heart') === 'false') {
+    var favoriteObject = {};
+    favoriteObject.label = 'hello';
+    $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
+    $favoriteIcon.setAttribute('data-heart', 'true');
+    data.favorites.push(favoriteObject);
+  } else {
+    $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
+    $favoriteIcon.setAttribute('data-heart', 'false');
+  }
 }
+
+// DOM Content Loaded Event
+
+function DOMContentLoaded(event) {
+  viewSwap(data.view);
+}
+
+document.addEventListener('DOMContentLoaded', DOMContentLoaded);
