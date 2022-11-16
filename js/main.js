@@ -90,7 +90,7 @@ function clickFunction(event) {
   data.view = pageView;
   if (pageView === 'favorites-page') {
     resultsArray = [];
-    resultsArray.push(data.favorites);
+    resultsArray = [...data.favorites];
   }
 }
 $searchLink.addEventListener('click', clickFunction);
@@ -154,7 +154,7 @@ function saveToFavorite(event) {
     };
     data.favorites.push(favoriteObject);
     // render to favorites page
-    var favorite = renderResult(favoriteObject[0]);
+    var favorite = renderResult(favoriteObject.food);
     $rowFavorite.appendChild(favorite);
     // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
