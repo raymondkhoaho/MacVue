@@ -6,7 +6,6 @@ var $rowResult = document.querySelector('.result-item');
 var $noResults = document.querySelector('.noresults');
 var $viewNodes = document.querySelectorAll('.view');
 var $searchLink = document.querySelector('.search-link');
-
 var resultsArray = [];
 
 // Clear Search Bar
@@ -98,10 +97,7 @@ var $detailsKcal = document.querySelector('#details-kcal');
 var $detailsProtein = document.querySelector('#details-protein');
 var $detailsCarbs = document.querySelector('#details-carbs');
 var $detailsFat = document.querySelector('#details-fat');
-
-var $itemNodes = document.querySelector('.result-item');
-
-$itemNodes.addEventListener('click', clickDetails);
+var $resultsNodes = document.querySelector('.result-item');
 
 function clickDetails(event) {
   if (event.target.tagName === 'IMG' || event.target.tagName === 'H4') {
@@ -122,4 +118,15 @@ function clickDetails(event) {
     }
     viewSwap('details-page');
   }
+}
+
+$resultsNodes.addEventListener('click', clickDetails);
+
+// save to favorite function
+var $favoriteIcon = document.querySelector('#favoriteicon');
+$favoriteIcon.addEventListener('click', saveToFavorite);
+
+function saveToFavorite(event) {
+  $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
+
 }

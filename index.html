@@ -56,7 +56,7 @@
         <div class="wrapper">
           <img id="details-image" src="https://www.edamam.com/food-img/4df/4df0fd62e878ed84b387b9e3ab48f2dc.jpg">
         </div>
-        <p>Qty: <span id="details-qty"></span> Unit: <span id="details-unit"></span></p>
+        <p>Qty: <span id="details-qty">100</span> Unit: <span id="details-unit">g</span></p>
       </div>
       <div class="row">
         <div class="column-fourth center padding">
@@ -85,9 +85,16 @@
         </div>
       </div>
       <div class="row center">
-        <a class="favorite-icon" href="#"><i class="fa-regular fa-heart"></i></a>
+        <a class="favorite-icon" href="#"><i id="favoriteicon" class="fa-regular fa-heart"></i></a>
       </div>
-
+    </div>
+    <!-- Favorites Page -->
+    <div class="view container hidden" data-view="favorites-page">
+      <div class="row">
+        <h3>Favorites</h3>
+      </div>
+      <div class="row favorite-items">
+      </div>
     </div>
   </main>
   <script src="js/data.js"></script>
