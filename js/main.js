@@ -6,7 +6,17 @@ var $rowResult = document.querySelector('.result-item');
 var $noResults = document.querySelector('.noresults');
 var $viewNodes = document.querySelectorAll('.view');
 var $searchLink = document.querySelector('.search-link');
+var $favoriteLink = document.querySelector('.favorite-link');
+var $detailsHeader = document.querySelector('#details-header');
+var $detailsImg = document.querySelector('#details-image');
+var $detailsKcal = document.querySelector('#details-kcal');
+var $detailsProtein = document.querySelector('#details-protein');
+var $detailsCarbs = document.querySelector('#details-carbs');
+var $detailsFat = document.querySelector('#details-fat');
+var $resultsNodes = document.querySelector('.result-item');
+var $favoritesNodes = document.querySelector('.favorite-items');
 var resultsArray = [];
+var currentIndex = null;
 
 // Clear Search Bar
 function clearSearch(event) {
@@ -26,9 +36,9 @@ function getFoodData(event) {
       $noResults.setAttribute('class', 'row noresults');
     } else {
       $rowResult.replaceChildren();
-      resultsArray.push(xhr.response.hints);
-      for (var i = 0; i < resultsArray[0].length; i++) {
-        var result = renderResult(resultsArray[0][i].food);
+      resultsArray = [...xhr.response.hints];
+      for (var i = 0; i < resultsArray.length; i++) {
+        var result = renderResult(resultsArray[i].food);
         result.setAttribute('data-search-index', i);
         $rowResult.appendChild(result);
         viewSwap('results-page');
@@ -82,37 +92,39 @@ function viewSwap(view) {
 // click function - will need to rework this to account for other icon clicks.
 
 function clickFunction(event) {
-  viewSwap('search-form');
+  var pageView = event.target.getAttribute('data-view');
+  viewSwap(pageView);
   $noResults.setAttribute('class', 'row noresults hidden');
-  resultsArray = [];
-  data.view = 'search-form';
+  data.view = pageView;
+  if (pageView === 'favorites-page') {
+    resultsArray = [...data.favorites];
+  }
 }
 $searchLink.addEventListener('click', clickFunction);
+$favoriteLink.addEventListener('click', clickFunction);
 
 // view detail click function
-var $detailsHeader = document.querySelector('#details-header');
-var $detailsImg = document.querySelector('#details-image');
-var $detailsKcal = document.querySelector('#details-kcal');
-var $detailsProtein = document.querySelector('#details-protein');
-var $detailsCarbs = document.querySelector('#details-carbs');
-var $detailsFat = document.querySelector('#details-fat');
-var $resultsNodes = document.querySelector('.result-item');
 
 function clickDetails(event) {
   if (event.target.tagName === 'IMG' || event.target.tagName === 'H4') {
-    for (var j = 0; j < resultsArray[0].length; j++) {
+    for (var j = 0; j < resultsArray.length; j++) {
       var closestDiv = event.target.closest('div[data-search-index]');
       if (closestDiv.getAttribute('data-search-index') === j.toString()) {
-        if (resultsArray[0][j].food.image !== undefined) {
-          $detailsImg.setAttribute('src', resultsArray[0][j].food.image);
+        if (resultsArray[j].food.image !== undefined) {
+          $detailsImg.setAttribute('src', resultsArray[j].food.image);
         } else {
           $detailsImg.setAttribute('src', 'images/MacVueIcon.png');
         }
-        $detailsHeader.textContent = resultsArray[0][j].food.label;
-        $detailsKcal.textContent = Math.floor(resultsArray[0][j].food.nutrients.ENERC_KCAL);
-        $detailsProtein.textContent = Math.floor(resultsArray[0][j].food.nutrients.PROCNT);
-        $detailsCarbs.textContent = Math.floor(resultsArray[0][j].food.nutrients.CHOCDF);
-        $detailsFat.textContent = Math.floor(resultsArray[0][j].food.nutrients.FAT);
+        $detailsHeader.textContent = resultsArray[j].food.label;
+        $detailsKcal.textContent = Math.floor(resultsArray[j].food.nutrients.ENERC_KCAL);
+        $detailsProtein.textContent = Math.floor(resultsArray[j].food.nutrients.PROCNT);
+        $detailsCarbs.textContent = Math.floor(resultsArray[j].food.nutrients.CHOCDF);
+        $detailsFat.textContent = Math.floor(resultsArray[j].food.nutrients.FAT);
+        if (resultsArray[j].heart === true) {
+          $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
+        } else {
+          $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
+        }
       }
     }
     viewSwap('details-page');
@@ -120,6 +132,7 @@ function clickDetails(event) {
 }
 
 $resultsNodes.addEventListener('click', clickDetails);
+$favoritesNodes.addEventListener('click', clickDetails);
 
 // save to favorite function
 var $rowFavorite = document.querySelector('.favorite-items');
@@ -131,16 +144,24 @@ var heart = false;
 function saveToFavorite(event) {
   if (heart === false) {
     // save to local storage
-    var favoriteObject = {};
-    favoriteObject.label = $detailsHeader.textContent;
-    favoriteObject.image = $detailsImg.src;
-    favoriteObject.kcal = $detailsKcal.textContent;
-    favoriteObject.protein = $detailsProtein.textContent;
-    favoriteObject.carbs = $detailsCarbs.textContent;
-    favoriteObject.fat = $detailsFat.textContent;
+    var favoriteObject = {
+      food: {
+        label: $detailsHeader.textContent,
+        image: $detailsImg.src,
+        nutrients: {
+          CHOCDF: $detailsCarbs.textContent,
+          ENERC_KCAL: $detailsKcal.textContent,
+          FAT: $detailsFat.textContent,
+          PROCNT: $detailsProtein.textContent
+        }
+      },
+      heart: true
+    };
     data.favorites.push(favoriteObject);
     // render to favorites page
-    var favorite = renderResult(favoriteObject);
+    var favorite = renderResult(favoriteObject.food);
+    favorite.setAttribute('data-search-index', currentIndex);
+    currentIndex++;
     $rowFavorite.appendChild(favorite);
     // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
@@ -154,6 +175,13 @@ function saveToFavorite(event) {
 // DOM Content Loaded Event
 
 function DOMContentLoaded(event) {
+  for (var k = 0; k < data.favorites.length; k++) {
+    var favorites = renderResult(data.favorites[k].food);
+    favorites.setAttribute('data-search-index', k);
+    $rowFavorite.appendChild(favorites);
+    resultsArray = [...data.favorites];
+  }
+  currentIndex = data.favorites.length;
   viewSwap(data.view);
 }
 
