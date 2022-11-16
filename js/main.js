@@ -138,12 +138,13 @@ function saveToFavorite(event) {
     favoriteObject.protein = $detailsProtein.textContent;
     favoriteObject.carbs = $detailsCarbs.textContent;
     favoriteObject.fat = $detailsFat.textContent;
+    data.favorites.push(favoriteObject);
     // render to favorites page
     var favorite = renderResult(favoriteObject);
     $rowFavorite.appendChild(favorite);
+    // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
     heart = true;
-    data.favorites.push(favoriteObject);
   } else {
     $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
     heart = false;
