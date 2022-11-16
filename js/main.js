@@ -157,6 +157,10 @@ function saveToFavorite(event) {
 // DOM Content Loaded Event
 
 function DOMContentLoaded(event) {
+  for (var k = 0; k < data.favorites.length; k++) {
+    var favorites = renderResult(data.favorites[k]);
+    $rowFavorite.appendChild(favorites);
+  }
   viewSwap(data.view);
 }
 
