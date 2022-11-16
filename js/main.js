@@ -115,6 +115,7 @@ function clickDetails(event) {
         } else {
           $detailsImg.setAttribute('src', 'images/MacVueIcon.png');
         }
+        $detailsHeader.setAttribute('data-search-index', j);
         $detailsHeader.textContent = resultsArray[j].food.label;
         $detailsKcal.textContent = Math.floor(resultsArray[j].food.nutrients.ENERC_KCAL);
         $detailsProtein.textContent = Math.floor(resultsArray[j].food.nutrients.PROCNT);
@@ -134,14 +135,14 @@ function clickDetails(event) {
 $resultsNodes.addEventListener('click', clickDetails);
 $favoritesNodes.addEventListener('click', clickDetails);
 
-// save to favorite function
+// save/delete favorite function
 var $rowFavorite = document.querySelector('.favorite-items');
 var $favoriteIcon = document.querySelector('#favoriteicon');
-$favoriteIcon.addEventListener('click', saveToFavorite);
+$favoriteIcon.addEventListener('click', favoriteClickFunction);
 
 var heart = false;
 
-function saveToFavorite(event) {
+function favoriteClickFunction(event) {
   if (heart === false) {
     // save to local storage
     var favoriteObject = {
@@ -166,9 +167,12 @@ function saveToFavorite(event) {
     // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
     heart = true;
-  } else {
+  } else if (heart === true) {
     $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
     heart = false;
+    // for (var l = 0; l < resultsArray.length; l++) {
+
+    // }
   }
 }
 
