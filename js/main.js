@@ -36,7 +36,6 @@ function getFoodData(event) {
       $noResults.setAttribute('class', 'row noresults');
     } else {
       $rowResult.replaceChildren();
-      resultsArray = [];
       resultsArray = [...xhr.response.hints];
       for (var i = 0; i < resultsArray.length; i++) {
         var result = renderResult(resultsArray[i].food);
@@ -98,7 +97,6 @@ function clickFunction(event) {
   $noResults.setAttribute('class', 'row noresults hidden');
   data.view = pageView;
   if (pageView === 'favorites-page') {
-    resultsArray = [];
     resultsArray = [...data.favorites];
   }
 }
