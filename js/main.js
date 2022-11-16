@@ -6,6 +6,7 @@ var $rowResult = document.querySelector('.result-item');
 var $noResults = document.querySelector('.noresults');
 var $viewNodes = document.querySelectorAll('.view');
 var $searchLink = document.querySelector('.search-link');
+var $favoriteLink = document.querySelector('.favorite-link');
 var resultsArray = [];
 
 // Clear Search Bar
@@ -82,12 +83,14 @@ function viewSwap(view) {
 // click function - will need to rework this to account for other icon clicks.
 
 function clickFunction(event) {
-  viewSwap('search-form');
+  var pageView = event.target.getAttribute('data-view');
+  viewSwap(pageView);
   $noResults.setAttribute('class', 'row noresults hidden');
   resultsArray = [];
-  data.view = 'search-form';
+  data.view = pageView;
 }
 $searchLink.addEventListener('click', clickFunction);
+$favoriteLink.addEventListener('click', clickFunction);
 
 // view detail click function
 var $detailsHeader = document.querySelector('#details-header');
