@@ -27,8 +27,8 @@ function getFoodData(event) {
     } else {
       $rowResult.replaceChildren();
       resultsArray.push(xhr.response.hints);
-      for (var i = 0; i < xhr.response.hints.length; i++) {
-        var result = renderResult(resultsArray[0][i]);
+      for (var i = 0; i < resultsArray[0].length; i++) {
+        var result = renderResult(resultsArray[0][i].food);
         result.setAttribute('data-search-index', i);
         $rowResult.appendChild(result);
         viewSwap('results-page');
@@ -51,14 +51,14 @@ function renderResult(result) {
   $imageDiv.setAttribute('class', 'wrapper');
 
   var $newImg = document.createElement('img');
-  if (result.food.image !== undefined) {
-    $newImg.setAttribute('src', result.food.image);
+  if (result.image !== undefined) {
+    $newImg.setAttribute('src', result.image);
   } else {
     $newImg.setAttribute('src', 'images/MacVueIcon.png');
   }
 
   var $newH4 = document.createElement('h4');
-  $newH4.textContent = result.food.label;
+  $newH4.textContent = result.label;
 
   $newDiv.appendChild($imageDiv);
   $imageDiv.appendChild($newImg);
@@ -122,19 +122,31 @@ function clickDetails(event) {
 $resultsNodes.addEventListener('click', clickDetails);
 
 // save to favorite function
+var $rowFavorite = document.querySelector('.favorite-items');
 var $favoriteIcon = document.querySelector('#favoriteicon');
 $favoriteIcon.addEventListener('click', saveToFavorite);
 
+var heart = false;
+
 function saveToFavorite(event) {
-  if ($favoriteIcon.getAttribute('data-heart') === 'false') {
+  if (heart === false) {
+    // save to local storage
     var favoriteObject = {};
-    favoriteObject.label = 'hello';
+    favoriteObject.label = $detailsHeader.textContent;
+    favoriteObject.image = $detailsImg.src;
+    favoriteObject.kcal = $detailsKcal.textContent;
+    favoriteObject.protein = $detailsProtein.textContent;
+    favoriteObject.carbs = $detailsCarbs.textContent;
+    favoriteObject.fat = $detailsFat.textContent;
+    // render to favorites page
+    var favorite = renderResult(favoriteObject);
+    $rowFavorite.appendChild(favorite);
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
-    $favoriteIcon.setAttribute('data-heart', 'true');
+    heart = true;
     data.favorites.push(favoriteObject);
   } else {
     $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
-    $favoriteIcon.setAttribute('data-heart', 'false');
+    heart = false;
   }
 }
 

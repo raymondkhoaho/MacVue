@@ -2,8 +2,7 @@
 
 var data = {
   view: 'search-form',
-  favorites: [],
-  nextFavoriteId: 1
+  favorites: []
 };
 
 var previousDataJSON = localStorage.getItem('data-local-storage');
