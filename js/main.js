@@ -169,7 +169,7 @@ function saveToFavorite(event) {
 
 function DOMContentLoaded(event) {
   for (var k = 0; k < data.favorites.length; k++) {
-    var favorites = renderResult(data.favorites[k]);
+    var favorites = renderResult(data.favorites[k].food);
     favorites.setAttribute('data-search-index', k);
     $rowFavorite.appendChild(favorites);
   }
