@@ -108,12 +108,16 @@ function clickDetails(event) {
     for (var j = 0; j < resultsArray[0].length; j++) {
       var closestDiv = event.target.closest('div[data-search-index]');
       if (closestDiv.getAttribute('data-search-index') === j.toString()) {
+        if (resultsArray[0][j].food.image !== undefined) {
+          $detailsImg.setAttribute('src', resultsArray[0][j].food.image);
+        } else {
+          $detailsImg.setAttribute('src', 'images/MacVueIcon.png');
+        }
         $detailsHeader.textContent = resultsArray[0][j].food.label;
-        $detailsImg.setAttribute('src', resultsArray[0][j].food.image);
-        $detailsKcal.textContent = resultsArray[0][j].food.nutrients.ENERC_KCAL;
-        $detailsProtein.textContent = resultsArray[0][j].food.nutrients.PROCNT;
-        $detailsCarbs.textContent = resultsArray[0][j].food.nutrients.CHOCDF;
-        $detailsFat.textContent = resultsArray[0][j].food.nutrients.FAT;
+        $detailsKcal.textContent = Math.floor(resultsArray[0][j].food.nutrients.ENERC_KCAL);
+        $detailsProtein.textContent = Math.floor(resultsArray[0][j].food.nutrients.PROCNT);
+        $detailsCarbs.textContent = Math.floor(resultsArray[0][j].food.nutrients.CHOCDF);
+        $detailsFat.textContent = Math.floor(resultsArray[0][j].food.nutrients.FAT);
       }
     }
     viewSwap('details-page');
