@@ -122,6 +122,11 @@ function clickDetails(event) {
         $detailsProtein.textContent = Math.floor(resultsArray[j].food.nutrients.PROCNT);
         $detailsCarbs.textContent = Math.floor(resultsArray[j].food.nutrients.CHOCDF);
         $detailsFat.textContent = Math.floor(resultsArray[j].food.nutrients.FAT);
+        if (resultsArray[j].heart === true) {
+          $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
+        } else {
+          $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
+        }
       }
     }
     viewSwap('details-page');
@@ -151,7 +156,8 @@ function saveToFavorite(event) {
           FAT: $detailsFat.textContent,
           PROCNT: $detailsProtein.textContent
         }
-      }
+      },
+      heart: true
     };
     data.favorites.push(favoriteObject);
     // render to favorites page
