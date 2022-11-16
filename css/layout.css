@@ -15,13 +15,22 @@
   flex-basis: 50%;
 }
 
+.column-fourth {
+  flex-basis: 50%;
+}
+
 @media screen and (min-width: 768px) {
   .column-full,
-  .column-sixth {
+  .column-sixth,
+  .column-fourth {
     padding: 0 0.75rem;
   }
 
   .column-sixth {
     flex-basis: calc(100% / 6);
+  }
+
+  .column-fourth {
+    flex-basis: 25%;
   }
 }
