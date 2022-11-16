@@ -7,6 +7,8 @@ var $noResults = document.querySelector('.noresults');
 var $viewNodes = document.querySelectorAll('.view');
 var $searchLink = document.querySelector('.search-link');
 
+var resultsArray = [];
+
 // Clear Search Bar
 function clearSearch(event) {
   $searchText.value = '';
@@ -21,7 +23,7 @@ function getFoodData(event) {
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=62e1382f&app_key=fb581bd2de03e8a30b53d8a1a76b8b79&ingr=' + $searchText.value);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response.hints);
+    resultsArray.push(xhr.response.hints);
 
     if (xhr.response.hints.length === 0) {
       $noResults.setAttribute('class', 'row noresults');
@@ -29,7 +31,7 @@ function getFoodData(event) {
       $rowResult.replaceChildren();
       for (var i = 0; i < xhr.response.hints.length; i++) {
         var result = renderResult(xhr.response.hints[i]);
-        result.setAttribute('data-search-id', i);
+        result.setAttribute('data-search-index', i);
         $rowResult.appendChild(result);
         viewSwap('results-page');
         $noResults.setAttribute('class', 'row noresults hidden');
@@ -38,8 +40,8 @@ function getFoodData(event) {
   });
   xhr.send();
   $formSubmit.reset();
-}
 
+}
 $formSubmit.addEventListener('submit', getFoodData);
 
 // Render result function
@@ -85,5 +87,35 @@ function viewSwap(view) {
 function clickFunction(event) {
   viewSwap('search-form');
   $noResults.setAttribute('class', 'row noresults hidden');
+  resultsArray = [];
 }
 $searchLink.addEventListener('click', clickFunction);
+
+// view detail click function
+var $detailsHeader = document.querySelector('#details-header');
+var $detailsImg = document.querySelector('#details-image');
+var $detailsKcal = document.querySelector('#details-kcal');
+var $detailsProtein = document.querySelector('#details-protein');
+var $detailsCarbs = document.querySelector('#details-carbs');
+var $detailsFat = document.querySelector('#details-fat');
+
+var $itemNodes = document.querySelector('.result-item');
+
+$itemNodes.addEventListener('click', clickDetails);
+
+function clickDetails(event) {
+  if (event.target.tagName === 'IMG' || event.target.tagName === 'H4') {
+    for (var j = 0; j < resultsArray[0].length; j++) {
+      var closestDiv = event.target.closest('div[data-search-index]');
+      if (closestDiv.getAttribute('data-search-index') === j.toString()) {
+        $detailsHeader.textContent = resultsArray[0][j].food.label;
+        $detailsImg.setAttribute('src', resultsArray[0][j].food.image);
+        $detailsKcal.textContent = resultsArray[0][j].food.nutrients.ENERC_KCAL;
+        $detailsProtein.textContent = resultsArray[0][j].food.nutrients.PROCNT;
+        $detailsCarbs.textContent = resultsArray[0][j].food.nutrients.CHOCDF;
+        $detailsFat.textContent = resultsArray[0][j].food.nutrients.FAT;
+      }
+    }
+    viewSwap('details-page');
+  }
+}
