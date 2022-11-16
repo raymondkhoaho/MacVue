@@ -16,6 +16,7 @@ var $detailsFat = document.querySelector('#details-fat');
 var $resultsNodes = document.querySelector('.result-item');
 var $favoritesNodes = document.querySelector('.favorite-items');
 var resultsArray = [];
+var currentIndex = null;
 
 // Clear Search Bar
 function clearSearch(event) {
@@ -155,6 +156,8 @@ function saveToFavorite(event) {
     data.favorites.push(favoriteObject);
     // render to favorites page
     var favorite = renderResult(favoriteObject.food);
+    favorite.setAttribute('data-search-index', currentIndex);
+    currentIndex++;
     $rowFavorite.appendChild(favorite);
     // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
@@ -172,7 +175,9 @@ function DOMContentLoaded(event) {
     var favorites = renderResult(data.favorites[k].food);
     favorites.setAttribute('data-search-index', k);
     $rowFavorite.appendChild(favorites);
+    resultsArray = [...data.favorites];
   }
+  currentIndex = data.favorites.length;
   viewSwap(data.view);
 }
 
