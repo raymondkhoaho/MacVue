@@ -7,6 +7,14 @@ var $noResults = document.querySelector('.noresults');
 var $viewNodes = document.querySelectorAll('.view');
 var $searchLink = document.querySelector('.search-link');
 var $favoriteLink = document.querySelector('.favorite-link');
+var $detailsHeader = document.querySelector('#details-header');
+var $detailsImg = document.querySelector('#details-image');
+var $detailsKcal = document.querySelector('#details-kcal');
+var $detailsProtein = document.querySelector('#details-protein');
+var $detailsCarbs = document.querySelector('#details-carbs');
+var $detailsFat = document.querySelector('#details-fat');
+var $resultsNodes = document.querySelector('.result-item');
+var $favoritesNodes = document.querySelector('.favorite-items');
 var resultsArray = [];
 
 // Clear Search Bar
@@ -97,14 +105,6 @@ $searchLink.addEventListener('click', clickFunction);
 $favoriteLink.addEventListener('click', clickFunction);
 
 // view detail click function
-var $detailsHeader = document.querySelector('#details-header');
-var $detailsImg = document.querySelector('#details-image');
-var $detailsKcal = document.querySelector('#details-kcal');
-var $detailsProtein = document.querySelector('#details-protein');
-var $detailsCarbs = document.querySelector('#details-carbs');
-var $detailsFat = document.querySelector('#details-fat');
-var $resultsNodes = document.querySelector('.result-item');
-var $favoritesNodes = document.querySelector('.favorite-items');
 
 function clickDetails(event) {
   if (event.target.tagName === 'IMG' || event.target.tagName === 'H4') {
