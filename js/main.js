@@ -140,10 +140,15 @@ var $rowFavorite = document.querySelector('.favorite-items');
 var $favoriteIcon = document.querySelector('#favoriteicon');
 $favoriteIcon.addEventListener('click', favoriteClickFunction);
 
-var heart = false;
-
 function favoriteClickFunction(event) {
-  if (heart === false) {
+  var heart = true;
+  if (heart === true) {
+    $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
+    heart = false;
+    var $favoritesNodesAll = $favoritesNodes.querySelectorAll('.column-sixth');
+    var deleteIndex = $detailsHeader.getAttribute('data-search-index');
+    $favoritesNodesAll[deleteIndex].remove();
+  } else if (heart === false) {
     // save to local storage
     var favoriteObject = {
       food: {
@@ -167,12 +172,6 @@ function favoriteClickFunction(event) {
     // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
     heart = true;
-  } else if (heart === true) {
-    $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
-    heart = false;
-    // for (var l = 0; l < resultsArray.length; l++) {
-
-    // }
   }
 }
 
