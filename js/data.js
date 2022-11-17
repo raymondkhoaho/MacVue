@@ -16,3 +16,4 @@ function unloadWindow(event) {
 }
 
 window.addEventListener('beforeunload', unloadWindow);
+window.addEventListener('pagehide', unloadWindow);

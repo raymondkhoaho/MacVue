@@ -26,11 +26,11 @@
     padding: 0 0.75rem;
   }
 
-  .column-sixth {
-    flex-basis: calc(100% / 6);
-  }
-
   .column-fourth {
     flex-basis: 25%;
+  }
+
+  .column-sixth {
+    flex-basis: calc(100% / 6);
   }
 }

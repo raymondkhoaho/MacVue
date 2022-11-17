@@ -1,4 +1,3 @@
-
 var $cancelIcon = document.querySelector('#cancelicon');
 var $searchText = document.querySelector('#searchbar');
 var $formSubmit = document.querySelector('#form');
@@ -15,11 +14,14 @@ var $detailsCarbs = document.querySelector('#details-carbs');
 var $detailsFat = document.querySelector('#details-fat');
 var $resultsNodes = document.querySelector('.result-item');
 var $favoritesNodes = document.querySelector('.favorite-items');
+var $rowFavorite = document.querySelector('.favorite-items');
+var $favoriteIcon = document.querySelector('#favoriteicon');
 var resultsArray = [];
 var currentFoodId = '';
 var objFavIdMap = {};
 
-// Clear Search Bar
+// Clear Search Bar Function
+
 function clearSearch(event) {
   $searchText.value = '';
 }
@@ -34,7 +36,7 @@ function getFoodData(event) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     if (xhr.response.hints.length === 0) {
-      $noResults.setAttribute('class', 'row noresults');
+      $noResults.setAttribute('class', 'noresults');
     } else {
       resultsArray = [];
       $rowResult.replaceChildren();
@@ -50,7 +52,7 @@ function getFoodData(event) {
         }
       }
       viewSwap('results-page');
-      $noResults.setAttribute('class', 'row noresults hidden');
+      $noResults.setAttribute('class', 'noresults hidden');
     }
   }
   );
@@ -59,7 +61,7 @@ function getFoodData(event) {
 }
 $formSubmit.addEventListener('submit', getFoodData);
 
-// Render result function
+// Render Result Function
 
 function renderResult(result) {
   var $newDiv = document.createElement('div');
@@ -72,7 +74,7 @@ function renderResult(result) {
   if (result.image !== undefined) {
     $newImg.setAttribute('src', result.image);
   } else {
-    $newImg.setAttribute('src', 'images/MacVueIcon.png');
+    $newImg.setAttribute('src', 'images/macvue-icon.png');
   }
 
   var $newH4 = document.createElement('h4');
@@ -85,7 +87,7 @@ function renderResult(result) {
   return $newDiv;
 }
 
-// view swapping
+// View Swap Function
 
 function viewSwap(view) {
   for (var i = 0; i < $viewNodes.length; i++) {
@@ -97,12 +99,12 @@ function viewSwap(view) {
   }
 }
 
-// click link function
+// Navigation Link Click Function
 
 function clickFunction(event) {
   var pageView = event.target.getAttribute('data-view');
   viewSwap(pageView);
-  $noResults.setAttribute('class', 'row noresults hidden');
+  $noResults.setAttribute('class', 'noresults hidden');
   data.view = pageView;
   if (pageView === 'favorites-page') {
     resultsArray = [...data.favorites];
@@ -112,7 +114,7 @@ function clickFunction(event) {
 $searchLink.addEventListener('click', clickFunction);
 $favoriteLink.addEventListener('click', clickFunction);
 
-// view detail click function
+// Detail Click Function
 
 function clickDetails(event) {
   if (event.target.tagName === 'IMG' || event.target.tagName === 'H4') {
@@ -132,7 +134,7 @@ function clickDetails(event) {
         if (resultsArray[j].food.image !== undefined) {
           $detailsImg.setAttribute('src', resultsArray[j].food.image);
         } else {
-          $detailsImg.setAttribute('src', 'images/MacVueIcon.png');
+          $detailsImg.setAttribute('src', 'images/macvue-icon.png');
         }
         currentFoodId = resultsArray[j].food.foodId;
         $detailsHeader.setAttribute('data-search-index', j);
@@ -151,10 +153,8 @@ function clickDetails(event) {
 $resultsNodes.addEventListener('click', clickDetails);
 $favoritesNodes.addEventListener('click', clickDetails);
 
-// save/delete favorite function
-var $rowFavorite = document.querySelector('.favorite-items');
-var $favoriteIcon = document.querySelector('#favoriteicon');
-$favoriteIcon.addEventListener('click', favoriteClickFunction);
+// Favorite Click Function
+
 var heart = true;
 
 function favoriteClickFunction(event) {
@@ -178,8 +178,7 @@ function favoriteClickFunction(event) {
           FAT: $detailsFat.textContent,
           PROCNT: $detailsProtein.textContent
         }
-      },
-      heart: true
+      }
     };
     data.favorites.push(favoriteObject);
     var favorite = renderResult(favoriteObject.food);
@@ -191,7 +190,9 @@ function favoriteClickFunction(event) {
   }
 }
 
-// DOM Content Loaded Event
+$favoriteIcon.addEventListener('click', favoriteClickFunction);
+
+// DOM Content Loaded Event Function
 
 function DOMContentLoaded(event) {
   for (var k = 0; k < data.favorites.length; k++) {
