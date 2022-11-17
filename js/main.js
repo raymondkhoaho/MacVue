@@ -16,9 +16,9 @@ var $detailsFat = document.querySelector('#details-fat');
 var $resultsNodes = document.querySelector('.result-item');
 var $favoritesNodes = document.querySelector('.favorite-items');
 var resultsArray = [];
-var favoritesArray = [];
-var currentIndex = null;
+// var currentIndex = null;
 var currentFoodId = '';
+var objFavIdMap = {};
 
 // Clear Search Bar
 function clearSearch(event) {
@@ -47,6 +47,7 @@ function getFoodData(event) {
           resultsArray.push(xhr.response.hints[i]);
           var result = renderResult(xhr.response.hints[i].food);
           result.setAttribute('data-search-index', count++);
+          result.setAttribute('data-food-id', xhr.response.hints[i].food.foodId);
           $rowResult.appendChild(result);
         }
       }
@@ -106,9 +107,9 @@ function clickFunction(event) {
   $noResults.setAttribute('class', 'row noresults hidden');
   data.view = pageView;
   if (pageView === 'favorites-page') {
-    favoritesArray = [...data.favorites];
+    resultsArray = [...data.favorites];
   }
-  return favoritesArray;
+  return resultsArray;
 }
 $searchLink.addEventListener('click', clickFunction);
 $favoriteLink.addEventListener('click', clickFunction);
@@ -117,9 +118,10 @@ $favoriteLink.addEventListener('click', clickFunction);
 
 function clickDetails(event) {
   if (event.target.tagName === 'IMG' || event.target.tagName === 'H4') {
+    var closestDiv = event.target.closest('div.column-sixth');
     for (var j = 0; j < resultsArray.length; j++) {
-      var closestDiv = event.target.closest('div[data-search-index]');
-      if (closestDiv.getAttribute('data-search-index') === j.toString()) {
+
+      if (closestDiv.getAttribute('data-food-id') === resultsArray[j].food.foodId.toString()) {
         if (resultsArray[j].food.image !== undefined) {
           $detailsImg.setAttribute('src', resultsArray[j].food.image);
         } else {
@@ -127,6 +129,7 @@ function clickDetails(event) {
         }
         currentFoodId = resultsArray[j].food.foodId;
         $detailsHeader.setAttribute('data-search-index', j);
+        $detailsHeader.setAttribute('data-food-id', resultsArray[j].food.foodId);
         $detailsHeader.textContent = resultsArray[j].food.label;
         $detailsKcal.textContent = Math.floor(resultsArray[j].food.nutrients.ENERC_KCAL);
         $detailsProtein.textContent = Math.floor(resultsArray[j].food.nutrients.PROCNT);
@@ -166,6 +169,7 @@ function favoriteClickFunction(event) {
     data.favorites.splice(deleteIndex, 1);
   } else if (heart === false) {
     // save to local storage
+
     heart = true;
     var favoriteObject = {
       food: {
@@ -184,11 +188,14 @@ function favoriteClickFunction(event) {
     data.favorites.push(favoriteObject);
     // render to favorites page
     var favorite = renderResult(favoriteObject.food);
-    favorite.setAttribute('data-search-index', currentIndex);
-    currentIndex++;
+    favorite.setAttribute('data-food-id', currentFoodId);
+    // favorite.setAttribute('data-search-index', currentIndex);
+    // currentIndex++;
     $rowFavorite.appendChild(favorite);
     // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
+    objFavIdMap[currentFoodId] = true;
+
   }
 }
 
@@ -197,11 +204,12 @@ function favoriteClickFunction(event) {
 function DOMContentLoaded(event) {
   for (var k = 0; k < data.favorites.length; k++) {
     var favorites = renderResult(data.favorites[k].food);
-    favorites.setAttribute('data-search-index', k);
+    // favorites.setAttribute('data-search-index', k);
+    favorites.setAttribute('data-food-id', data.favorites[k].food.foodId);
     $rowFavorite.appendChild(favorites);
     // resultsArray = [...data.favorites];
   }
-  currentIndex = data.favorites.length;
+  // currentIndex = data.favorites.length;
   viewSwap(data.view);
 }
 
