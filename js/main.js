@@ -39,13 +39,12 @@ function getFoodData(event) {
       resultsArray = [];
       $rowResult.replaceChildren();
       var objIdMap = {};
-      var count = 0;
       for (var i = 0; i < xhr.response.hints.length; i++) {
         if (!objIdMap[xhr.response.hints[i].food.foodId]) {
           objIdMap[xhr.response.hints[i].food.foodId] = true;
           resultsArray.push(xhr.response.hints[i]);
           var result = renderResult(xhr.response.hints[i].food);
-          result.setAttribute('data-search-index', count++);
+          result.setAttribute('data-search-index', i);
           result.setAttribute('data-food-id', xhr.response.hints[i].food.foodId);
           $rowResult.appendChild(result);
         }
