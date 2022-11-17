@@ -16,6 +16,7 @@ var $detailsFat = document.querySelector('#details-fat');
 var $resultsNodes = document.querySelector('.result-item');
 var $favoritesNodes = document.querySelector('.favorite-items');
 var resultsArray = [];
+var favoritesArray = [];
 var currentIndex = null;
 var currentFoodId = '';
 
@@ -36,17 +37,24 @@ function getFoodData(event) {
     if (xhr.response.hints.length === 0) {
       $noResults.setAttribute('class', 'row noresults');
     } else {
+      resultsArray = [];
       $rowResult.replaceChildren();
-      resultsArray = [...xhr.response.hints];
-      for (var i = 0; i < resultsArray.length; i++) {
-        var result = renderResult(resultsArray[i].food);
-        result.setAttribute('data-search-index', i);
-        $rowResult.appendChild(result);
-        viewSwap('results-page');
-        $noResults.setAttribute('class', 'row noresults hidden');
+      var objIdMap = {};
+      var count = 0;
+      for (var i = 0; i < xhr.response.hints.length; i++) {
+        if (!objIdMap[xhr.response.hints[i].food.foodId]) {
+          objIdMap[xhr.response.hints[i].food.foodId] = true;
+          resultsArray.push(xhr.response.hints[i]);
+          var result = renderResult(xhr.response.hints[i].food);
+          result.setAttribute('data-search-index', count++);
+          $rowResult.appendChild(result);
+        }
       }
+      viewSwap('results-page');
+      $noResults.setAttribute('class', 'row noresults hidden');
     }
-  });
+  }
+  );
   xhr.send();
   $formSubmit.reset();
 }
@@ -98,8 +106,9 @@ function clickFunction(event) {
   $noResults.setAttribute('class', 'row noresults hidden');
   data.view = pageView;
   if (pageView === 'favorites-page') {
-    resultsArray = [...data.favorites];
+    favoritesArray = [...data.favorites];
   }
+  return favoritesArray;
 }
 $searchLink.addEventListener('click', clickFunction);
 $favoriteLink.addEventListener('click', clickFunction);
@@ -133,7 +142,7 @@ function clickDetails(event) {
       }
     }
     viewSwap('details-page');
-    return currentFoodId;
+    // return currentFoodId;
 
   }
 }
@@ -155,8 +164,6 @@ function favoriteClickFunction(event) {
     var deleteIndex = $detailsHeader.getAttribute('data-search-index');
     $favoritesNodesAll[deleteIndex].remove();
     data.favorites.splice(deleteIndex, 1);
-    var dataJSON = JSON.stringify(data);
-    localStorage.setItem('data-local-storage', dataJSON);
   } else if (heart === false) {
     // save to local storage
     heart = true;
@@ -175,8 +182,6 @@ function favoriteClickFunction(event) {
       heart: true
     };
     data.favorites.push(favoriteObject);
-    dataJSON = JSON.stringify(data);
-    localStorage.setItem('data-local-storage', dataJSON);
     // render to favorites page
     var favorite = renderResult(favoriteObject.food);
     favorite.setAttribute('data-search-index', currentIndex);
@@ -194,7 +199,7 @@ function DOMContentLoaded(event) {
     var favorites = renderResult(data.favorites[k].food);
     favorites.setAttribute('data-search-index', k);
     $rowFavorite.appendChild(favorites);
-    resultsArray = [...data.favorites];
+    // resultsArray = [...data.favorites];
   }
   currentIndex = data.favorites.length;
   viewSwap(data.view);
