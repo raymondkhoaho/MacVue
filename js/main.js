@@ -74,7 +74,7 @@ function renderResult(result) {
   if (result.image !== undefined) {
     $newImg.setAttribute('src', result.image);
   } else {
-    $newImg.setAttribute('src', 'images/MacVueIcon.png');
+    $newImg.setAttribute('src', 'images/macvue-icon.png');
   }
 
   var $newH4 = document.createElement('h4');
@@ -134,7 +134,7 @@ function clickDetails(event) {
         if (resultsArray[j].food.image !== undefined) {
           $detailsImg.setAttribute('src', resultsArray[j].food.image);
         } else {
-          $detailsImg.setAttribute('src', 'images/MacVueIcon.png');
+          $detailsImg.setAttribute('src', 'images/macvue-icon.png');
         }
         currentFoodId = resultsArray[j].food.foodId;
         $detailsHeader.setAttribute('data-search-index', j);
