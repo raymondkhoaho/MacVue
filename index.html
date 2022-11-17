@@ -18,7 +18,7 @@
           <img id="icon" src="images/macvue-icon.png">
           <h2>MacVue</h2>
         </div>
-        <div class="navicon">
+        <div class="navicons">
           <a href="#"><i data-view="search-form" class="fa-solid fa-magnifying-glass search-link"></i></a>
           <a href="#"><i data-view="favorites-page" class="fa-solid fa-heart favorite-link"></i></a>
         </div>
@@ -37,7 +37,7 @@
           </form>
         </div>
       </div>
-      <div class="row noresults hidden">
+      <div class="noresults hidden">
         <h4>No search results...</h4>
       </div>
     </div>
@@ -53,35 +53,35 @@
     <!-- end results page -->
     <!-- start details page -->
     <div class="view container hidden" data-view="details-page">
-      <div class="row column-center">
+      <div class="row flex-column-center">
         <h3 id="details-header"></h3>
         <div class="wrapper">
           <img id="details-image" src="https://www.edamam.com/food-img/4df/4df0fd62e878ed84b387b9e3ab48f2dc.jpg">
         </div>
-        <p>Qty: <span id="details-qty">100</span> Unit: <span id="details-unit">g</span></p>
+        <p id="details-text">Qty: <span id="details-qty">100</span> Unit: <span id="details-unit">g</span></p>
       </div>
       <div class="row">
-        <div class="column-fourth center padding">
+        <div class="column-fourth center details-padding">
           <div class="wrapper flex-column-center">
-            <h4 class="margin">Energy:</h4>
+            <h4 class="details-margin">Energy:</h4>
             <p><span id="details-kcal"></span> kcal</p>
           </div>
         </div>
-        <div class="column-fourth center padding">
+        <div class="column-fourth center details-padding">
           <div class="wrapper flex-column-center">
-            <h4 class="margin">Protein:</h4>
+            <h4 class="details-margin">Protein:</h4>
             <p><span id="details-protein"></span> g</p>
           </div>
         </div>
-        <div class="column-fourth center padding">
+        <div class="column-fourth center details-padding">
           <div class="wrapper flex-column-center">
-            <h4 class="margin">Carbs:</h4>
+            <h4 class="details-margin">Carbs:</h4>
             <p><span id="details-carbs"></span> g</p>
           </div>
         </div>
-        <div class="column-fourth center padding">
+        <div class="column-fourth center details-padding">
           <div class="wrapper flex-column-center">
-            <h4 class="margin">Fat:</h4>
+            <h4 class="details-margin">Fat:</h4>
             <p><span id="details-fat"></span> g</p>
           </div>
         </div>
