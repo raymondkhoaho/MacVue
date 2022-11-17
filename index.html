@@ -19,14 +19,14 @@
           <h2>MacVue</h2>
         </div>
         <div class="navicon">
-          <a class="" href="#"><i data-view="search-form" class="fa-solid fa-magnifying-glass search-link"></i></a>
+          <a href="#"><i data-view="search-form" class="fa-solid fa-magnifying-glass search-link"></i></a>
           <a href="#"><i data-view="favorites-page" class="fa-solid fa-heart favorite-link"></i></a>
         </div>
       </div>
     </div>
   </header>
   <main>
-    <!-- search form -->
+    <!-- start search page -->
     <div class="view container" data-view="search-form">
       <div class="row">
         <div class="column-full center">
@@ -41,7 +41,8 @@
         <h4>No search results...</h4>
       </div>
     </div>
-    <!-- results page -->
+    <!-- end search page -->
+    <!-- start results page -->
     <div class="view container hidden" data-view="results-page">
       <div class="row">
         <h3>Search Results</h3>
@@ -49,7 +50,8 @@
       <div class="row result-item">
       </div>
     </div>
-    <!-- details page -->
+    <!-- end results page -->
+    <!-- start details page -->
     <div class="view container hidden" data-view="details-page">
       <div class="row column-center">
         <h3 id="details-header"></h3>
@@ -88,7 +90,8 @@
         <a class="favorite-icon" href="#"><i id="favoriteicon" class="fa-regular fa-heart"></i></a>
       </div>
     </div>
-    <!-- Favorites Page -->
+    <!-- end details page -->
+    <!-- start favorites page -->
     <div class="view container hidden" data-view="favorites-page">
       <div class="row">
         <h3>Favorites</h3>
@@ -96,6 +99,7 @@
       <div class="row favorite-items">
       </div>
     </div>
+    <!-- end favorites page -->
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
