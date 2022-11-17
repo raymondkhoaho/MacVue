@@ -178,8 +178,7 @@ function favoriteClickFunction(event) {
           FAT: $detailsFat.textContent,
           PROCNT: $detailsProtein.textContent
         }
-      },
-      heart: true
+      }
     };
     data.favorites.push(favoriteObject);
     var favorite = renderResult(favoriteObject.food);
