@@ -17,6 +17,7 @@ var $resultsNodes = document.querySelector('.result-item');
 var $favoritesNodes = document.querySelector('.favorite-items');
 var resultsArray = [];
 var currentIndex = null;
+var currentFoodId = '';
 
 // Clear Search Bar
 function clearSearch(event) {
@@ -89,7 +90,7 @@ function viewSwap(view) {
   }
 }
 
-// click function - will need to rework this to account for other icon clicks.
+// click link function
 
 function clickFunction(event) {
   var pageView = event.target.getAttribute('data-view');
@@ -115,6 +116,7 @@ function clickDetails(event) {
         } else {
           $detailsImg.setAttribute('src', 'images/MacVueIcon.png');
         }
+        currentFoodId = resultsArray[j].food.foodId;
         $detailsHeader.setAttribute('data-search-index', j);
         $detailsHeader.textContent = resultsArray[j].food.label;
         $detailsKcal.textContent = Math.floor(resultsArray[j].food.nutrients.ENERC_KCAL);
@@ -122,13 +124,17 @@ function clickDetails(event) {
         $detailsCarbs.textContent = Math.floor(resultsArray[j].food.nutrients.CHOCDF);
         $detailsFat.textContent = Math.floor(resultsArray[j].food.nutrients.FAT);
         if (resultsArray[j].heart === true) {
+          heart = true;
           $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
         } else {
+          heart = false;
           $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
         }
       }
     }
     viewSwap('details-page');
+    return currentFoodId;
+
   }
 }
 
@@ -139,19 +145,24 @@ $favoritesNodes.addEventListener('click', clickDetails);
 var $rowFavorite = document.querySelector('.favorite-items');
 var $favoriteIcon = document.querySelector('#favoriteicon');
 $favoriteIcon.addEventListener('click', favoriteClickFunction);
+var heart = true;
 
 function favoriteClickFunction(event) {
-  var heart = true;
   if (heart === true) {
-    $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
     heart = false;
+    $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
     var $favoritesNodesAll = $favoritesNodes.querySelectorAll('.column-sixth');
     var deleteIndex = $detailsHeader.getAttribute('data-search-index');
     $favoritesNodesAll[deleteIndex].remove();
+    data.favorites.splice(deleteIndex, 1);
+    var dataJSON = JSON.stringify(data);
+    localStorage.setItem('data-local-storage', dataJSON);
   } else if (heart === false) {
     // save to local storage
+    heart = true;
     var favoriteObject = {
       food: {
+        foodId: currentFoodId,
         label: $detailsHeader.textContent,
         image: $detailsImg.src,
         nutrients: {
@@ -164,6 +175,8 @@ function favoriteClickFunction(event) {
       heart: true
     };
     data.favorites.push(favoriteObject);
+    dataJSON = JSON.stringify(data);
+    localStorage.setItem('data-local-storage', dataJSON);
     // render to favorites page
     var favorite = renderResult(favoriteObject.food);
     favorite.setAttribute('data-search-index', currentIndex);
@@ -171,7 +184,6 @@ function favoriteClickFunction(event) {
     $rowFavorite.appendChild(favorite);
     // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
-    heart = true;
   }
 }
 
