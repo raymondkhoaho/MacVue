@@ -16,7 +16,6 @@ var $detailsFat = document.querySelector('#details-fat');
 var $resultsNodes = document.querySelector('.result-item');
 var $favoritesNodes = document.querySelector('.favorite-items');
 var resultsArray = [];
-// var currentIndex = null;
 var currentFoodId = '';
 var objFavIdMap = {};
 
@@ -120,7 +119,16 @@ function clickDetails(event) {
   if (event.target.tagName === 'IMG' || event.target.tagName === 'H4') {
     var closestDiv = event.target.closest('div.column-sixth');
     for (var j = 0; j < resultsArray.length; j++) {
-
+      for (var p = 0; p < data.favorites.length; p++) {
+        if (closestDiv.getAttribute('data-food-id') === data.favorites[p].food.foodId) {
+          heart = true;
+          $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
+          break;
+        } else {
+          heart = false;
+          $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
+        }
+      }
       if (closestDiv.getAttribute('data-food-id') === resultsArray[j].food.foodId.toString()) {
         if (resultsArray[j].food.image !== undefined) {
           $detailsImg.setAttribute('src', resultsArray[j].food.image);
@@ -135,18 +143,9 @@ function clickDetails(event) {
         $detailsProtein.textContent = Math.floor(resultsArray[j].food.nutrients.PROCNT);
         $detailsCarbs.textContent = Math.floor(resultsArray[j].food.nutrients.CHOCDF);
         $detailsFat.textContent = Math.floor(resultsArray[j].food.nutrients.FAT);
-        if (resultsArray[j].heart === true) {
-          heart = true;
-          $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
-        } else {
-          heart = false;
-          $favoriteIcon.setAttribute('class', 'fa-regular fa-heart');
-        }
       }
     }
     viewSwap('details-page');
-    // return currentFoodId;
-
   }
 }
 
@@ -168,8 +167,6 @@ function favoriteClickFunction(event) {
     $favoritesNodesAll[deleteIndex].remove();
     data.favorites.splice(deleteIndex, 1);
   } else if (heart === false) {
-    // save to local storage
-
     heart = true;
     var favoriteObject = {
       food: {
@@ -186,13 +183,9 @@ function favoriteClickFunction(event) {
       heart: true
     };
     data.favorites.push(favoriteObject);
-    // render to favorites page
     var favorite = renderResult(favoriteObject.food);
     favorite.setAttribute('data-food-id', currentFoodId);
-    // favorite.setAttribute('data-search-index', currentIndex);
-    // currentIndex++;
     $rowFavorite.appendChild(favorite);
-    // switch heart icon and boolean
     $favoriteIcon.setAttribute('class', 'fa-solid fa-heart');
     objFavIdMap[currentFoodId] = true;
 
@@ -204,12 +197,9 @@ function favoriteClickFunction(event) {
 function DOMContentLoaded(event) {
   for (var k = 0; k < data.favorites.length; k++) {
     var favorites = renderResult(data.favorites[k].food);
-    // favorites.setAttribute('data-search-index', k);
     favorites.setAttribute('data-food-id', data.favorites[k].food.foodId);
     $rowFavorite.appendChild(favorites);
-    // resultsArray = [...data.favorites];
   }
-  // currentIndex = data.favorites.length;
   viewSwap(data.view);
 }
 
