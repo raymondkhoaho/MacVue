@@ -30,13 +30,31 @@
     <div class="view container" data-view="search-form">
       <div class="row">
         <div class="column-full center">
-          <form id="form">
+          <form id="form" class="">
             <i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
             <input id="searchbar" type="search" placeholder="Search for a food" value="" >
             <i id="cancelicon" class="fa-solid fa-xmark"></i>
           </form>
+
         </div>
       </div>
+      <div class="row center hidden loader">
+        <div class="lds-default">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
       <div class="noresults hidden">
         <h4>No search results...</h4>
       </div>
