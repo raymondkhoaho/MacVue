@@ -166,16 +166,28 @@ h4 {
   transition: transform 0.5s, opacity 0.5s;
 }
 
+.view-more-link {
+  text-decoration: none;
+  color: #9f9f9f;
+  font-weight: 300;
+  font-size: 0.8rem;
+  letter-spacing: 0.05rem;
+  margin: 50px;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
 .flex-column:active h4,
 .flex-column-center p,
-.favorite-icon {
+.favorite-icon,
+.view-more-link:active {
   color: #4dc3b9;
 }
 
 .flex-column:hover,
 #cancelicon:hover,
 .navicons a:hover,
-.favorite-icon:hover {
+.favorite-icon:hover,
+.view-more-link:hover {
   transform: scale(1.1);
   opacity: 0.75;
 }
@@ -280,13 +292,4 @@ h4 {
   50% {
     transform: scale(1.5);
   }
-}
-
-.view-more-link {
-  text-decoration: none;
-  color: #9f9f9f;
-  font-weight: 300;
-  font-size: 0.8rem;
-  letter-spacing: 0.05rem;
-  margin: 50px;
 }
