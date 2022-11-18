@@ -39,6 +39,7 @@ function getFoodData(event) {
   xhr.open('GET', 'https://api.edamam.com/api/food-database/v2/parser?app_id=62e1382f&app_key=fb581bd2de03e8a30b53d8a1a76b8b79&ingr=' + $searchText.value);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    // console.log(xhr.response);
     if (xhr.response.hints.length === 0) {
       $loader.setAttribute('class', 'row center hidden loader');
       $formSubmit.setAttribute('class', '');
