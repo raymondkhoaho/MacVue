@@ -16,9 +16,11 @@ var $resultsNodes = document.querySelector('.result-item');
 var $favoritesNodes = document.querySelector('.favorite-items');
 var $rowFavorite = document.querySelector('.favorite-items');
 var $favoriteIcon = document.querySelector('#favoriteicon');
+var $viewMoreLink = document.querySelector('.view-more-link');
 var resultsArray = [];
 var currentFoodId = '';
 var objFavIdMap = {};
+var nextPageLink = '';
 var $loader = document.querySelector('.loader');
 
 // Clear Search Bar Function
@@ -40,6 +42,7 @@ function getFoodData(event) {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     // console.log(xhr.response);
+    nextPageLink = xhr.response._links.next.href;
     if (xhr.response.hints.length === 0) {
       $loader.setAttribute('class', 'row center hidden loader');
       $formSubmit.setAttribute('class', '');
@@ -69,6 +72,33 @@ function getFoodData(event) {
   $formSubmit.reset();
 }
 $formSubmit.addEventListener('submit', getFoodData);
+
+// View More Function
+
+function viewMoreData(event) {
+  event.preventDefault();
+  var xhrNext = new XMLHttpRequest();
+  xhrNext.open('GET', nextPageLink);
+  xhrNext.responseType = 'json';
+  xhrNext.addEventListener('load', function () {
+    nextPageLink = xhrNext.response._links.next.href;
+    var objIdMap2 = {};
+    for (var q = 0; q < xhrNext.response.hints.length; q++) {
+      if (!objIdMap2[xhrNext.response.hints[q].food.foodId]) {
+        objIdMap2[xhrNext.response.hints[q].food.foodId] = true;
+        resultsArray.push(xhrNext.response.hints[q]);
+        var result = renderResult(xhrNext.response.hints[q].food);
+        result.setAttribute('data-search-index', q);
+        result.setAttribute('data-food-id', xhrNext.response.hints[q].food.foodId);
+        $rowResult.appendChild(result);
+      }
+    }
+  }
+  );
+  xhrNext.send();
+}
+
+$viewMoreLink.addEventListener('click', viewMoreData);
 
 // Render Result Function
 
