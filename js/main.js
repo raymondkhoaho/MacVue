@@ -22,6 +22,8 @@ var currentFoodId = '';
 var objFavIdMap = {};
 var nextPageLink = '';
 var $loader = document.querySelector('.loader');
+var $loader2 = document.querySelector('.loader2');
+var $viewMoreDiv = document.querySelector('.view-more');
 
 // Clear Search Bar Function
 
@@ -76,6 +78,8 @@ $formSubmit.addEventListener('submit', getFoodData);
 
 function viewMoreData(event) {
   event.preventDefault();
+  $viewMoreDiv.setAttribute('class', 'view-more row center hidden');
+  $loader2.setAttribute('class', 'loader2 row center');
   var xhrNext = new XMLHttpRequest();
   xhrNext.open('GET', nextPageLink);
   xhrNext.responseType = 'json';
@@ -92,6 +96,8 @@ function viewMoreData(event) {
         $rowResult.appendChild(result);
       }
     }
+    $viewMoreDiv.setAttribute('class', 'view-more row center');
+    $loader2.setAttribute('class', 'loader2 row center hidden');
   }
   );
   xhrNext.send();
