@@ -248,3 +248,11 @@ function DOMContentLoaded(event) {
 }
 
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
+
+// typeahead function
+
+// $searchText.addEventListener('input', typeahead);
+
+// function typeahead(event) {
+//   console.log($searchText.value);
+// }

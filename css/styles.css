@@ -71,6 +71,8 @@ input[type="search"] {
   width: 300px;
   padding: 0 40px;
   letter-spacing: 0.05rem;
+  position: relative;
+  z-index: 1;
 }
 
 input[type="search"]:focus {
@@ -97,6 +99,7 @@ input[type="search"]::-webkit-search-results-decoration {
   top: 12px;
   left: 15px;
   cursor: text;
+  z-index: 2;
 }
 
 #cancelicon {
@@ -107,6 +110,47 @@ input[type="search"]::-webkit-search-results-decoration {
   right: 15px;
   cursor: pointer;
   transition: transform 0.5s, opacity 0.2s;
+  z-index: 2;
+}
+
+.typeahead {
+  position: relative;
+  top: -18px;
+  z-index: 0;
+  background-color: #dfdfdf;
+
+  /* border-bottom: 1.5px solid #4dc3b9;
+  border-left: 1.5px solid #4dc3b9;
+  border-right: 1.5px solid #4dc3b9; */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 300px;
+  padding: 20px 40px;
+  letter-spacing: 0.05rem;
+  margin-top: 0;
+  max-height: 150px;
+  line-height: 1rem;
+}
+
+.typeahead-li {
+  list-style: none;
+  font-size: 0.75rem;
+  padding: 2px 0;
+  position: relative;
+  color: #58595b;
+}
+
+.typeahead-li:focus {
+  outline: none;
+}
+
+.searchicon {
+  position: absolute;
+  font-size: 0.75rem;
+  color: #818183;
+  top: 5px;
+  left: -22px;
+  cursor: pointer;
 }
 
 .hidden {
