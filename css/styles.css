@@ -140,8 +140,14 @@ input[type="search"]::-webkit-search-results-decoration {
   color: #58595b;
 }
 
-.typeahead-li:focus {
+/* .typeahead-li:focus {
   outline: none;
+} */
+
+.typeahead:focus {
+  border-bottom: 1.5px solid #4dc3b9;
+  border-left: 1.5px solid #4dc3b9;
+  border-right: 1.5px solid #4dc3b9;
 }
 
 .searchicon {
