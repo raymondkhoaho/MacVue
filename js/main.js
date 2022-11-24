@@ -259,6 +259,15 @@ function typeahead(event) {
     $typeaheadUl.setAttribute('class', 'typeahead hidden');
   } else {
     $typeaheadUl.setAttribute('class', 'typeahead');
+    var xhrAuto = new XMLHttpRequest();
+    xhrAuto.open('GET', 'https://api.edamam.com/auto-complete?app_id=62e1382f&app_key=fb581bd2de03e8a30b53d8a1a76b8b79&limit=5&q=' + $searchText.value);
+    xhrAuto.responseType = 'json';
+    xhrAuto.addEventListener('load', function () {
+      // console.log(xhrAuto.status);
+      // console.log(xhrAuto.response);
+    });
+    xhrAuto.send();
   }
-  // console.log($searchText.value);
 }
+
+// console.log($searchText.value);
