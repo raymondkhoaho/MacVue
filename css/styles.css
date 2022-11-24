@@ -114,14 +114,10 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .typeahead {
-  position: relative;
-  top: -18px;
+  position: absolute;
+  top: 23px;
   z-index: 0;
   background-color: #dfdfdf;
-
-  /* border-bottom: 1.5px solid #4dc3b9;
-  border-left: 1.5px solid #4dc3b9;
-  border-right: 1.5px solid #4dc3b9; */
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   width: 300px;
@@ -129,7 +125,7 @@ input[type="search"]::-webkit-search-results-decoration {
   letter-spacing: 0.05rem;
   margin-top: 0;
   max-height: 150px;
-  line-height: 1rem;
+  line-height: 1.3rem;
 }
 
 .typeahead-li {
@@ -144,11 +140,11 @@ input[type="search"]::-webkit-search-results-decoration {
   outline: none;
 } */
 
-.typeahead:focus {
+/* .typeahead:focus {
   border-bottom: 1.5px solid #4dc3b9;
   border-left: 1.5px solid #4dc3b9;
   border-right: 1.5px solid #4dc3b9;
-}
+} */
 
 .searchicon {
   position: absolute;

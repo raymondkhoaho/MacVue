@@ -250,9 +250,15 @@ function DOMContentLoaded(event) {
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
 
 // typeahead function
+var $typeaheadUl = document.querySelector('.typeahead');
 
-// $searchText.addEventListener('input', typeahead);
+$searchText.addEventListener('input', typeahead);
 
-// function typeahead(event) {
-//   console.log($searchText.value);
-// }
+function typeahead(event) {
+  if ($searchText.value === '') {
+    $typeaheadUl.setAttribute('class', 'typeahead hidden');
+  } else {
+    $typeaheadUl.setAttribute('class', 'typeahead');
+  }
+  // console.log($searchText.value);
+}
