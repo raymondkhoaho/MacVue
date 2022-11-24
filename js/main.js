@@ -252,9 +252,17 @@ document.addEventListener('DOMContentLoaded', DOMContentLoaded);
 // typeahead function
 var $typeaheadUl = document.querySelector('.typeahead');
 
-$searchText.addEventListener('input', typeahead);
+$searchText.addEventListener('input', debounce(typeahead, 500));
 
-function typeahead(event) {
+function debounce(callback, delay) {
+  let timeout;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(typeahead, 500);
+  };
+}
+
+function typeahead() {
   if ($searchText.value === '') {
     $typeaheadUl.setAttribute('class', 'typeahead hidden');
   } else {
@@ -263,11 +271,8 @@ function typeahead(event) {
     xhrAuto.open('GET', 'https://api.edamam.com/auto-complete?app_id=62e1382f&app_key=fb581bd2de03e8a30b53d8a1a76b8b79&limit=5&q=' + $searchText.value);
     xhrAuto.responseType = 'json';
     xhrAuto.addEventListener('load', function () {
-      // console.log(xhrAuto.status);
       // console.log(xhrAuto.response);
     });
     xhrAuto.send();
   }
 }
-
-// console.log($searchText.value);
