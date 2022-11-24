@@ -121,7 +121,7 @@ input[type="search"]::-webkit-search-results-decoration {
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   width: 300px;
-  padding: 20px 40px;
+  padding: 20px 40px 5px;
   letter-spacing: 0.05rem;
   margin-top: 0;
   line-height: 1.3rem;
@@ -133,6 +133,10 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 2px 0;
   position: relative;
   color: #58595b;
+}
+
+.typeahead-li:hover {
+  cursor: pointer;
 }
 
 /* .typeahead-li:focus {
