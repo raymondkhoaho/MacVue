@@ -271,8 +271,22 @@ function typeahead() {
     xhrAuto.open('GET', 'https://api.edamam.com/auto-complete?app_id=62e1382f&app_key=fb581bd2de03e8a30b53d8a1a76b8b79&limit=5&q=' + $searchText.value);
     xhrAuto.responseType = 'json';
     xhrAuto.addEventListener('load', function () {
-      // console.log(xhrAuto.response);
+      for (var n = 0; n < 5; n++) {
+        renderLi(xhrAuto.response[n]);
+      }
     });
     xhrAuto.send();
   }
+}
+
+function renderLi(match) {
+  var $newLi = document.createElement('li');
+  $newLi.setAttribute('class', 'typeahead-li');
+  $newLi.textContent = match;
+
+  var $newI = document.createElement('i');
+  $newI.setAttribute('class', 'searchicon fa-solid fa-magnifying-glass');
+  $newLi.appendChild($newI);
+
+  $typeaheadUl.appendChild($newLi);
 }

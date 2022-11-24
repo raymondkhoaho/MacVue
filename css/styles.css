@@ -124,7 +124,6 @@ input[type="search"]::-webkit-search-results-decoration {
   padding: 20px 40px;
   letter-spacing: 0.05rem;
   margin-top: 0;
-  max-height: 150px;
   line-height: 1.3rem;
 }
 
