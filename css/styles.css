@@ -115,13 +115,13 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .typeahead {
   position: absolute;
-  top: 23px;
+  top: 20px;
   z-index: 0;
   background-color: #dfdfdf;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
   width: 300px;
-  padding: 20px 40px 5px;
+  padding: 20px 40px 0;
   letter-spacing: 0.05rem;
   margin-top: 0;
   line-height: 1.3rem;
