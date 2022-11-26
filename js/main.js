@@ -68,6 +68,8 @@ function getFoodData(event) {
       $loader.setAttribute('class', 'row center hidden loader');
       $formSubmit.setAttribute('class', '');
       $noResults.setAttribute('class', 'noresults hidden');
+      $typeaheadUl.setAttribute('class', 'typeahead hidden');
+
     }
   }
   );
