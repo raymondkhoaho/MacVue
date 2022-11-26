@@ -293,8 +293,10 @@ function renderLi(match) {
   $typeaheadUl.appendChild($newLi);
 }
 
-// var $typeaheadLi = document.querySelector('.typeahead-li');
+// var $typeaheadLi = document.querySelectorAll('.typeahead-li');
 
-// $typeaheadLi.addEventListener('click', replaceSearch);
+$typeaheadUl.addEventListener('click', replaceSearch);
 
-// function replaceSearch
+function replaceSearch(event) {
+  $searchText.value = event.target.textContent;
+}
