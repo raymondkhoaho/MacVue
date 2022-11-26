@@ -29,6 +29,7 @@ var $viewMoreDiv = document.querySelector('.view-more');
 
 function clearSearch(event) {
   $searchText.value = '';
+  $typeaheadUl.setAttribute('class', 'typeahead hidden');
 }
 $cancelIcon.addEventListener('click', clearSearch);
 
