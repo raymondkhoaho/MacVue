@@ -295,6 +295,7 @@ function renderLi(match) {
 
 function replaceSearch(event) {
   $searchText.value = event.target.textContent;
+  $typeaheadUl.setAttribute('class', 'typeahead hidden');
   getFoodData(event);
 }
 
