@@ -137,17 +137,8 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .typeahead-li:hover {
   cursor: pointer;
+  opacity: 0.75;
 }
-
-/* .typeahead-li:focus {
-  outline: none;
-} */
-
-/* .typeahead:focus {
-  border-bottom: 1.5px solid #4dc3b9;
-  border-left: 1.5px solid #4dc3b9;
-  border-right: 1.5px solid #4dc3b9;
-} */
 
 .searchicon {
   position: absolute;
