@@ -24,6 +24,7 @@ var nextPageLink = '';
 var $loader = document.querySelector('.loader');
 var $loader2 = document.querySelector('.loader2');
 var $viewMoreDiv = document.querySelector('.view-more');
+var $typeaheadUl = document.querySelector('.typeahead');
 
 // Clear Search Bar Function
 
@@ -250,10 +251,7 @@ function DOMContentLoaded(event) {
 
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
 
-// typeahead function
-var $typeaheadUl = document.querySelector('.typeahead');
-
-$searchText.addEventListener('input', debounce(typeahead, 500));
+// Debounce/Typeahead Function
 
 function debounce(callback, delay) {
   let timeout;
@@ -262,6 +260,8 @@ function debounce(callback, delay) {
     timeout = setTimeout(typeahead, 500);
   };
 }
+
+$searchText.addEventListener('input', debounce(typeahead, 500));
 
 function typeahead() {
   if ($searchText.value === '') {
@@ -293,9 +293,9 @@ function renderLi(match) {
   $typeaheadUl.appendChild($newLi);
 }
 
-$typeaheadUl.addEventListener('click', replaceSearch);
-
 function replaceSearch(event) {
   $searchText.value = event.target.textContent;
   getFoodData(event);
 }
+
+$typeaheadUl.addEventListener('click', replaceSearch);
