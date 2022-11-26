@@ -220,7 +220,8 @@ h4 {
 .flex-column:active h4,
 .flex-column-center p,
 .favorite-icon,
-.view-more-link:active {
+.view-more-link:active,
+.typeahead-li:active {
   color: #4dc3b9;
 }
 
