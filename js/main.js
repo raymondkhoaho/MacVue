@@ -24,11 +24,13 @@ var nextPageLink = '';
 var $loader = document.querySelector('.loader');
 var $loader2 = document.querySelector('.loader2');
 var $viewMoreDiv = document.querySelector('.view-more');
+var $typeaheadUl = document.querySelector('.typeahead');
 
 // Clear Search Bar Function
 
 function clearSearch(event) {
   $searchText.value = '';
+  $typeaheadUl.setAttribute('class', 'typeahead hidden');
 }
 $cancelIcon.addEventListener('click', clearSearch);
 
@@ -248,3 +250,53 @@ function DOMContentLoaded(event) {
 }
 
 document.addEventListener('DOMContentLoaded', DOMContentLoaded);
+
+// Debounce/Typeahead Function
+
+function debounce(callback, delay) {
+  let timeout;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(typeahead, 500);
+  };
+}
+
+$searchText.addEventListener('input', debounce(typeahead, 500));
+
+function typeahead() {
+  if ($searchText.value === '') {
+    $typeaheadUl.setAttribute('class', 'typeahead hidden');
+  } else {
+    $typeaheadUl.replaceChildren();
+    $typeaheadUl.setAttribute('class', 'typeahead');
+    var xhrAuto = new XMLHttpRequest();
+    xhrAuto.open('GET', 'https://api.edamam.com/auto-complete?app_id=62e1382f&app_key=fb581bd2de03e8a30b53d8a1a76b8b79&limit=5&q=' + $searchText.value);
+    xhrAuto.responseType = 'json';
+    xhrAuto.addEventListener('load', function () {
+      for (var n = 0; n < xhrAuto.response.length; n++) {
+        renderLi(xhrAuto.response[n]);
+      }
+    });
+    xhrAuto.send();
+  }
+}
+
+function renderLi(match) {
+  var $newLi = document.createElement('li');
+  $newLi.setAttribute('class', 'typeahead-li');
+  $newLi.textContent = match;
+
+  var $newI = document.createElement('i');
+  $newI.setAttribute('class', 'searchicon fa-solid fa-magnifying-glass');
+  $newLi.appendChild($newI);
+
+  $typeaheadUl.appendChild($newLi);
+}
+
+function replaceSearch(event) {
+  $searchText.value = event.target.textContent;
+  $typeaheadUl.setAttribute('class', 'typeahead hidden');
+  getFoodData(event);
+}
+
+$typeaheadUl.addEventListener('click', replaceSearch);
