@@ -30,112 +30,115 @@
       </div>
     </div>
   </header>
-  <main>
-    <!-- start search page -->
-    <div class="view container" data-view="search-form">
-      <div class="row">
-        <div class="column-full center">
-          <form id="form" class="" autocomplete="off">
-            <i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
-            <input id="searchbar" type="search" autocomplete="off" placeholder="Search for a food" value="" >
-            <i id="cancelicon" class="fa-solid fa-xmark"></i>
-            <ul class="typeahead hidden" tabindex="-1">
-            </ul>
-          </form>
+  <div class="bg-image"></div>
+  <div class="content">
+    <main>
+      <!-- start search page -->
+      <div class="view container" data-view="search-form">
+        <div class="row">
+          <div class="column-full center">
+            <form id="form" class="" autocomplete="off">
+              <i id="searchicon" class="fa-solid fa-magnifying-glass"></i>
+              <input id="searchbar" type="search" autocomplete="off" placeholder="Search for a food" value="" >
+              <i id="cancelicon" class="fa-solid fa-xmark"></i>
+              <ul class="typeahead hidden" tabindex="-1">
+              </ul>
+            </form>
 
-        </div>
-      </div>
-      <div class="row center hidden loader">
-        <div class="lds-default">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <div class="noresults hidden">
-        <h4>No search results...</h4>
-      </div>
-    </div>
-    <!-- end search page -->
-    <!-- start results page -->
-    <div class="view container hidden" data-view="results-page">
-      <div class="row">
-        <h3>Search Results</h3>
-      </div>
-      <div class="row result-item">
-      </div>
-      <div class="row center view-more">
-        <a class="view-more-link" href="#">VIEW MORE</a>
-      </div>
-      <div class="row center hidden loader2">
-        <div class="lds-ellipsis">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </div>
-    <!-- end results page -->
-    <!-- start details page -->
-    <div class="view container hidden" data-view="details-page">
-      <div class="row flex-column-center">
-        <h3 id="details-header"></h3>
-        <div class="wrapper">
-          <img id="details-image" src="https://www.edamam.com/food-img/4df/4df0fd62e878ed84b387b9e3ab48f2dc.jpg">
-        </div>
-        <p id="details-text">Qty: <span id="details-qty">100</span> Unit: <span id="details-unit">g</span></p>
-      </div>
-      <div class="row">
-        <div class="column-fourth center details-padding">
-          <div class="wrapper flex-column-center border">
-            <h4 class="details-margin">Energy:</h4>
-            <p><span id="details-kcal"></span> kcal</p>
           </div>
         </div>
-        <div class="column-fourth center details-padding">
-          <div class="wrapper flex-column-center border">
-            <h4 class="details-margin">Protein:</h4>
-            <p><span id="details-protein"></span> g</p>
+        <div class="row center hidden loader">
+          <div class="lds-default">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
         </div>
-        <div class="column-fourth center details-padding">
-          <div class="wrapper flex-column-center border">
-            <h4 class="details-margin">Carbs:</h4>
-            <p><span id="details-carbs"></span> g</p>
-          </div>
+        <div class="noresults hidden">
+          <h4>No search results...</h4>
         </div>
-        <div class="column-fourth center details-padding">
-          <div class="wrapper flex-column-center border">
-            <h4 class="details-margin">Fat:</h4>
-            <p><span id="details-fat"></span> g</p>
+      </div>
+      <!-- end search page -->
+      <!-- start results page -->
+      <div class="view container hidden" data-view="results-page">
+        <div class="row">
+          <h3>Search Results</h3>
+        </div>
+        <div class="row result-item">
+        </div>
+        <div class="row center view-more">
+          <a class="view-more-link" href="#">VIEW MORE</a>
+        </div>
+        <div class="row center hidden loader2">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
           </div>
         </div>
       </div>
-      <div class="row center">
-        <a class="favorite-icon" href="#/"><i id="favoriteicon" class="fa-regular fa-heart"></i></a>
+      <!-- end results page -->
+      <!-- start details page -->
+      <div class="view container hidden" data-view="details-page">
+        <div class="row flex-column-center">
+          <h3 id="details-header"></h3>
+          <div class="wrapper">
+            <img id="details-image" src="https://www.edamam.com/food-img/4df/4df0fd62e878ed84b387b9e3ab48f2dc.jpg">
+          </div>
+          <p id="details-text">Qty: <span id="details-qty">100</span> Unit: <span id="details-unit">g</span></p>
+        </div>
+        <div class="row">
+          <div class="column-fourth center details-padding">
+            <div class="wrapper flex-column-center border">
+              <h4 class="details-margin">Energy:</h4>
+              <p><span id="details-kcal"></span> kcal</p>
+            </div>
+          </div>
+          <div class="column-fourth center details-padding">
+            <div class="wrapper flex-column-center border">
+              <h4 class="details-margin">Protein:</h4>
+              <p><span id="details-protein"></span> g</p>
+            </div>
+          </div>
+          <div class="column-fourth center details-padding">
+            <div class="wrapper flex-column-center border">
+              <h4 class="details-margin">Carbs:</h4>
+              <p><span id="details-carbs"></span> g</p>
+            </div>
+          </div>
+          <div class="column-fourth center details-padding">
+            <div class="wrapper flex-column-center border">
+              <h4 class="details-margin">Fat:</h4>
+              <p><span id="details-fat"></span> g</p>
+            </div>
+          </div>
+        </div>
+        <div class="row center">
+          <a class="favorite-icon" href="#/"><i id="favoriteicon" class="fa-regular fa-heart"></i></a>
+        </div>
       </div>
-    </div>
-    <!-- end details page -->
-    <!-- start favorites page -->
-    <div class="view container hidden" data-view="favorites-page">
-      <div class="row">
-        <h3>Favorites</h3>
+      <!-- end details page -->
+      <!-- start favorites page -->
+      <div class="view container hidden" data-view="favorites-page">
+        <div class="row">
+          <h3>Favorites</h3>
+        </div>
+        <div class="row favorite-items">
+        </div>
       </div>
-      <div class="row favorite-items">
-      </div>
-    </div>
-    <!-- end favorites page -->
-  </main>
+      <!-- end favorites page -->
+    </main>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
