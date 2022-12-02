@@ -1,27 +1,31 @@
 body {
-  background-color: #58595b;
-  background-image: url("https://raymondkhoaho.github.io/MacVue/images/backgroundimage.jpg");
-  background-attachment: fixed;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-blend-mode: overlay;
-  background-position: 75% 10%;
   font-family: Roboto, sans-serif;
 }
 
-header {
+.bg-image {
+  background-color: #58595b;
+  background-image: url("https://raymondkhoaho.github.io/MacVue/images/backgroundimage.jpg");
   position: fixed;
-  width: 100%;
-  z-index: 1;
+  background-position: 75% 10%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
 }
 
-main {
-  padding-top: 60px;
+.content {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
 }
 
 .navbar {
   background-color: #4dc3b9;
   opacity: 0.9;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 #icon {
@@ -72,7 +76,7 @@ h4 {
 
 input[type="search"] {
   background-color: #dfdfdf;
-  border: 1.5px solid #dfdfdf;
+  border: 1.5px solid rgba(20, 19, 17, 0.6);
   border-radius: 20px;
   height: 40px;
   width: 300px;
@@ -132,6 +136,7 @@ input[type="search"]::-webkit-search-results-decoration {
   letter-spacing: 0.05rem;
   margin-top: 0;
   line-height: 1.3rem;
+  border: 1.5px solid rgba(20, 19, 17, 0.6);
 }
 
 .typeahead-li {
