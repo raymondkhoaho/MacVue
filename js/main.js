@@ -121,6 +121,7 @@ function renderResult(result) {
   var $newImg = document.createElement('img');
   if (result.image !== undefined) {
     $newImg.setAttribute('src', result.image);
+    $newImg.setAttribute('onerror', 'errorImage(this)');
   } else {
     $newImg.setAttribute('src', 'images/macvue-icon.png');
   }
@@ -133,6 +134,11 @@ function renderResult(result) {
   $newDiv.appendChild($newH4);
 
   return $newDiv;
+}
+
+// eslint-disable-next-line no-unused-vars
+function errorImage(image) {
+  image.src = 'images/macvue-icon.png';
 }
 
 // View Swap Function
@@ -181,6 +187,7 @@ function clickDetails(event) {
       if (closestDiv.getAttribute('data-food-id') === resultsArray[j].food.foodId.toString()) {
         if (resultsArray[j].food.image !== undefined) {
           $detailsImg.setAttribute('src', resultsArray[j].food.image);
+          $detailsImg.setAttribute('onerror', 'errorImage(this)');
         } else {
           $detailsImg.setAttribute('src', 'images/macvue-icon.png');
         }
