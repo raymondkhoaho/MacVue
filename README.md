@@ -33,9 +33,9 @@ Try the application live at [https://raymondkhoaho.github.io/MacVue/](https://ra
 
 
 ## Preview :eyes:
+
 ![MacVue Demo](/MacVuePreview.gif)
 
-![](https://github.com/raymondkhoaho/MacVue/blob/main/MacVuePreview1.gif)
 
 ## Development :technologist:
 ### Start Developing!
