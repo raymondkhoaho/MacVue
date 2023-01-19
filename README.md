@@ -47,4 +47,4 @@ Try the application live at [https://raymondkhoaho.github.io/MacVue/](https://ra
 
     ```
 
-2. Start the project! Once started, please view the appplication by opening http://localhost:5000 in your browser
+2. Once the project is cloned, you can open it using a live server plugin and enjoy!
