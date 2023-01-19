@@ -1,9 +1,11 @@
 # MacVue
 
-A dynamic HTML, CSS, and JavaScript solo project.
+A web application for the health conscious who want to view nutritional facts about a food.
 
 ## Why I Built This :thinking:
 
+I wanted to recreate something similar to what I use on a daily basis to track my nutritional intake and to
+get general information of macronutrients of a certain food.
 
 
 ## Live Demo :link:
@@ -13,7 +15,7 @@ Try the application live at [https://raymondkhoaho.github.io/MacVue/](https://ra
 ## Technologies Used
 
 ### Languages
-<a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=js,html,css" /></a>
+<a href="https://skillicons.dev"><img src="https://skillicons.dev/icons?i=html,css,js" /></a>
 ### Data Source
 * [Edamam Food Database API](https://developer.edamam.com/food-database-api-docs)
 
@@ -21,16 +23,19 @@ Try the application live at [https://raymondkhoaho.github.io/MacVue/](https://ra
 ## Features :book:
 
 * User can search for a food
-*
-*
+* User can view a list of matching food
+* User can select and view macro nutritional facts about the item
+* User can save to a list of favorited foods
+* User can view a list of favorited foods
+* User can delete items off of favorited list
+* User can view more search results from API
+* User can autocomplete search using typeahead
 
-## Stretch Features :notebook_with_decorative_cover:
-*
 
 ## Preview :eyes:
+![MacVue Demo](/MacVuePreview.gif)
 
-
-
+![](https://github.com/raymondkhoaho/MacVue/blob/main/MacVuePreview1.gif)
 
 ## Development :technologist:
 ### Start Developing!
